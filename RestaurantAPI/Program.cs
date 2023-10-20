@@ -12,7 +12,6 @@ builder.Host.UseNLog();
 
 // Add services to the container.
 
-builder.Services.AddTransient<IWeatherForcastService, WeatherForcastService>();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<RestaurantDbContext>();
 builder.Services.AddScoped<RestaurantSeeder>();
