@@ -23,15 +23,15 @@ public class RestaurantDbContext : DbContext
         
         modelBuilder.Entity<Address>(a =>
         {
-            a.Property(a => a.City)
+            a.Property(c => c.City)
                 .IsRequired()
                 .HasMaxLength(50);
             
-            a.Property(a => a.Street)
+            a.Property(s => s.Street)
                 .IsRequired()
                 .HasMaxLength(50);
             
-            a.Property(a => a.PostalCode)
+            a.Property(p => p.PostalCode)
                 .IsRequired()
                 .HasMaxLength(6);
         });
