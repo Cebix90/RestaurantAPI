@@ -9,7 +9,7 @@ public class RestaurantDbContext : DbContext
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<Dish> Dishes { get; set; }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Restaurant>()
@@ -20,6 +20,21 @@ public class RestaurantDbContext : DbContext
         modelBuilder.Entity<Dish>()
             .Property(d => d.Name)
             .IsRequired();
+        
+        modelBuilder.Entity<Address>(a =>
+        {
+            a.Property(a => a.City)
+                .IsRequired()
+                .HasMaxLength(50);
+            
+            a.Property(a => a.Street)
+                .IsRequired()
+                .HasMaxLength(50);
+            
+            a.Property(a => a.PostalCode)
+                .IsRequired()
+                .HasMaxLength(6);
+        });
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

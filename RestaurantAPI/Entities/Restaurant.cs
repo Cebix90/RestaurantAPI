@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿#nullable enable
+using System.Globalization;
 using System.Net.Sockets;
 
 namespace RestaurantAPI.Entities;
@@ -10,8 +11,8 @@ public class Restaurant
     public string Description { get; set; }
     public string Category { get; set; }
     public bool HasDelivery { get; set; }
-    public string ContactEmail { get; set; }
-    public string ContactNumber { get; set; }
+    public string? ContactEmail { get; set; }
+    public string? ContactNumber { get; set; }
 
     public int AddressId { get; set; }
     public virtual Address Address { get; set; }
