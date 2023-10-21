@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.OpenApi.Writers;
 using NLog.Web;
 using RestaurantAPI;
@@ -15,6 +16,7 @@ builder.Host.UseNLog();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<RestaurantDbContext>();
 builder.Services.AddScoped<RestaurantSeeder>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
