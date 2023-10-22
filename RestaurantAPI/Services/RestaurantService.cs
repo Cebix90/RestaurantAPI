@@ -15,6 +15,29 @@ public class RestaurantService : IRestaurantService
         _dbContext = dbContext;
         _mapper = mapper;
     }
+
+    public bool Delete(int id)
+    {
+        var restaurant = _dbContext
+            .Restaurants
+            .FirstOrDefault(r => r.Id == id);
+        
+        if (restaurant is null) return false;
+        
+        _dbContext.Restaurants.Remove(restaurant);
+        _dbContext.SaveChanges();
+
+        return true;
+    }
+    
+    public int Create(CreateRestaurantDto dto)
+    {
+        var restaurant = _mapper.Map<Restaurant>(dto);
+        _dbContext.Restaurants.Add(restaurant);
+        _dbContext.SaveChanges();
+
+        return restaurant.Id;
+    }
     
     public RestaurantDto GetById(int id)
     {
@@ -40,14 +63,5 @@ public class RestaurantService : IRestaurantService
 
         var result = _mapper.Map<List<RestaurantDto>>(restaurants);
         return result;
-    }
-    
-    public int Create (CreateRestaurantDto dto)
-    {
-        var restaurant = _mapper.Map<Restaurant>(dto);
-        _dbContext.Restaurants.Add(restaurant);
-        _dbContext.SaveChanges();
-
-        return restaurant.Id;
     }
 }

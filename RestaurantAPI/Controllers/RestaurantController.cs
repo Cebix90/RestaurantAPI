@@ -18,6 +18,16 @@ public class RestaurantController : ControllerBase
         _restaurantService = restaurantService;
     }
 
+    [HttpDelete("{id}")]
+    public ActionResult Delete([FromRoute] int id)
+    {
+        var isDeleted = _restaurantService.Delete(id);
+
+        if (isDeleted is false) return NotFound();
+        
+        return NoContent();
+    }
+    
     [HttpPost]
     public ActionResult CreateRestaurant([FromBody] CreateRestaurantDto dto)
     {
