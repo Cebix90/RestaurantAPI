@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantAPI.Entities;
 using RestaurantAPI.Models;
+using RestaurantAPI.Services.IServices;
 
 namespace RestaurantAPI.Services;
 
@@ -63,5 +64,22 @@ public class RestaurantService : IRestaurantService
 
         var result = _mapper.Map<List<RestaurantDto>>(restaurants);
         return result;
+    }
+    
+    public bool Update(int id, UpdateRestaurantDto dto)
+    {
+        var restaurant = _dbContext
+            .Restaurants
+            .FirstOrDefault(r => r.Id == id);
+
+        if (restaurant is null) return false;
+
+        restaurant.Name = dto.Name;
+        restaurant.Description = dto.Description;
+        restaurant.HasDelivery = dto.HasDelivery;
+
+        _dbContext.SaveChanges();
+
+        return true;
     }
 }

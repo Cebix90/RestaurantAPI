@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RestaurantAPI.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantAPI.Models;
-using RestaurantAPI.Services;
+using RestaurantAPI.Services.IServices;
 
 namespace RestaurantAPI.Controllers;
 
@@ -60,5 +57,23 @@ public class RestaurantController : ControllerBase
         }
         
         return Ok(restaurantDto);
+    }
+    
+    [HttpPut("{id}")]
+    public ActionResult Update([FromRoute] int id, [FromBody] UpdateRestaurantDto dto)
+    {
+        if(!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
+        var isUpdated = _restaurantService.Update(id, dto);
+        
+        if (isUpdated is false)
+        {
+            return NotFound();
+        }
+        
+        return Ok();
     }
 }

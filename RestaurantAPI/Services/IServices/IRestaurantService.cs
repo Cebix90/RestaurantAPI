@@ -1,6 +1,6 @@
 ﻿using RestaurantAPI.Models;
 
-namespace RestaurantAPI.Services;
+namespace RestaurantAPI.Services.IServices;
 
 public interface IRestaurantService
 {
@@ -8,4 +8,5 @@ public interface IRestaurantService
     int Create(CreateRestaurantDto dto);
     RestaurantDto GetById(int id);
     List<RestaurantDto> GetAll();
+    bool Update(int id, UpdateRestaurantDto dto);
 }
