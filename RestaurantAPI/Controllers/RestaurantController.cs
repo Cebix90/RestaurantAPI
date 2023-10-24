@@ -9,7 +9,6 @@ namespace RestaurantAPI.Controllers;
 public class RestaurantController : ControllerBase
 {
     private readonly IRestaurantService _restaurantService;
-
     public RestaurantController(IRestaurantService restaurantService)
     {
         _restaurantService = restaurantService;
