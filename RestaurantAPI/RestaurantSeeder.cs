@@ -20,6 +20,13 @@ public class RestaurantSeeder
                 _dbContext.Restaurants.AddRange(restaurants);
                 _dbContext.SaveChanges();
             }
+        
+             if (!_dbContext.Roles.Any())
+             {
+                 var roles = GetRoles();
+                 _dbContext.Roles.AddRange(roles);
+                 _dbContext.SaveChanges();
+             }
     }
 
     private IEnumerable<Restaurant> GetRestaurants()
@@ -73,5 +80,25 @@ public class RestaurantSeeder
         };
 
         return restaurants;
+    }
+
+    private IEnumerable<Role> GetRoles()
+    {
+        var roles = new List<Role>
+        {
+            new()
+            {
+                Name = "User"
+            },
+            new()
+            {
+                Name = "Manager"
+            },
+            new()
+            {
+                Name = "Admin"
+            }
+        };
+        return roles;
     }
 }
