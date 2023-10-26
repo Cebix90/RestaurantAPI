@@ -17,6 +17,11 @@ public class ErrorHandlingMiddleware : IMiddleware
         {
             await next.Invoke(context);
         }
+        catch(BadRequestExecption badRequestExecption)
+        {
+            context.Response.StatusCode = 400;
+            await context.Response.WriteAsync(badRequestExecption.Message);
+        }
         catch (NotFoundException notFoundException)
         {
             context.Response.StatusCode = 404;

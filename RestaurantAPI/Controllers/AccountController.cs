@@ -18,7 +18,14 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     public ActionResult RegisterUser([FromBody]RegisterUserDto dto)
     {
-        _accountService.RegisterUser(dto);
+        _accountService.RegisterUserAsync(dto);
         return Ok();
+    }
+    
+    [HttpPost("login")]
+    public ActionResult Login([FromBody]LoginDto dto)
+    {
+        string token = _accountService.GenerateJwt(dto);
+        return Ok(token);
     }
 }
