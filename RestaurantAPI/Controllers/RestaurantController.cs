@@ -25,6 +25,7 @@ public class RestaurantController : ControllerBase
     }
     
     [HttpPost]
+    [Authorize(Roles = "Admin, Manager")]
     public ActionResult CreateRestaurant([FromBody] CreateRestaurantDto dto)
     {
         var id =_restaurantService.Create(dto);
@@ -41,7 +42,6 @@ public class RestaurantController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    [AllowAnonymous]
     public ActionResult<RestaurantDto> Get([FromRoute] int id)
     {
         var restaurantDto = _restaurantService.GetById(id);
