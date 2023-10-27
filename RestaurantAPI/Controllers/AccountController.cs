@@ -16,9 +16,9 @@ public class AccountController : ControllerBase
     }
     
     [HttpPost("register")]
-    public ActionResult RegisterUser([FromBody]RegisterUserDto dto)
+    public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto dto)
     {
-        _accountService.RegisterUserAsync(dto);
+        await _accountService.RegisterUserAsync(dto);
         return Ok();
     }
     

@@ -23,7 +23,7 @@ public class AccountService : IAccountService
         _authenticationSettings = authenticationSettings;
     }
     
-    public async void RegisterUserAsync(RegisterUserDto dto)
+    public async Task RegisterUserAsync(RegisterUserDto dto)
     {
         var newUser = new User()
         {
