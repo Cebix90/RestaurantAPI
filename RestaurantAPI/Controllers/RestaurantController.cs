@@ -20,7 +20,7 @@ public class RestaurantController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult Delete([FromRoute] int id)
     {
-        _restaurantService.Delete(id, User);
+        _restaurantService.Delete(id);
         
         return NoContent();
     }
@@ -29,8 +29,7 @@ public class RestaurantController : ControllerBase
     [Authorize(Roles = "Admin, Manager")]
     public ActionResult CreateRestaurant([FromBody] CreateRestaurantDto dto)
     {
-        var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-        var id =_restaurantService.Create(dto, userId);
+        var id =_restaurantService.Create(dto);
         
         return Created($"/api/restaurant/{id}", null);
     }
@@ -55,7 +54,7 @@ public class RestaurantController : ControllerBase
     [HttpPut("{id}")]
     public ActionResult Update([FromRoute] int id, [FromBody] UpdateRestaurantDto dto)
     {
-        _restaurantService.Update(id, dto, User);
+        _restaurantService.Update(id, dto);
         
         return Ok();
     }
