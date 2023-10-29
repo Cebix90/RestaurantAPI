@@ -48,8 +48,10 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("HasNationality", policyBuilder => policyBuilder.RequireClaim("Nationality"));
     options.AddPolicy("Atleast20", policyBuilder => policyBuilder.AddRequirements(new MinimumAgeRequirement(20)));
+    options.AddPolicy("CreatedAtleast2Restaurants", policyBuilder => policyBuilder.AddRequirements(new CreatedMultipleRestaurantsRequirement(2)));
 });
 
+builder.Services.AddScoped<IAuthorizationHandler, CreatedMultipleRestaurantsRequirementHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 builder.Services.AddControllers().AddFluentValidation();
